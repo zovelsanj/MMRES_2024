@@ -62,11 +62,7 @@ def metropolis_hasting(Nsim=10**5, plot=True):
         pdf_prop = gaussian_2d(x_prop1, x_prop2, rho=0.99)
         ratio =  pdf_prop / chain[i,2]
 
-        if ratio >= 1:                            # Acceptance check
-            chain[i+1] = x_prop1, x_prop2, pdf_prop
-            count_accepted += 1
-
-        elif ratio > np.random.random():
+        if ratio >= 1 or ratio > np.random.random():
             chain[i+1] = x_prop1, x_prop2, pdf_prop
             count_accepted += 1
 
